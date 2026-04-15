@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moje wymarzone wakacje</title>
+
+<style>
+
+/* TŁO */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+    color: #333;
+}
+
+/* HEADER */
+header {
+    background: linear-gradient(135deg, #ff6e40, #ffcc00);
+    color: white;
+    padding: 25px;
+    text-align: center;
+}
+
+/* MENU */
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 8px;
+}
+
+nav a:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+/* SEKCJE */
+section {
+    display: none;
+    padding: 40px;
+    max-width: 900px;
+    margin: auto;
+}
+
+.active {
+    display: block;
+}
+
+/* KARTY */
+.box {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+/* GALERIA */
+img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+/* BUTTONY */
+button {
+    padding: 12px 25px;
+    margin: 10px;
+    background: linear-gradient(135deg, #ff6e40, #ffcc00);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* STOPKA */
+footer {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Moje wymarzone wakacje 🌴</h1>
+
+<nav>
+<a onclick="showPage('home')">Strona główna</a>
+<a onclick="showPage('gallery')">Galeria</a>
+<a onclick="showPage('info')">Informacje</a>
+</nav>
+</header>
+
+<!-- STRONA GŁÓWNA -->
+<section id="home" class="active">
+<div class="box">
+
+<h2>Moje wymarzone wakacje</h2>
+
+<p>
+Moim wymarzonym miejscem na wakacje jest Nowy Jork. To jedno z najbardziej znanych i
+imponujących miast na świecie. Znajduje się w Stanach Zjednoczonych i przyciąga miliony
+turystów każdego roku.
+</p>
+
+<p>
+Chciałbym zobaczyć słynną Statuę Wolności, przejść się po Times Square pełnym świateł
+i ogromnych ekranów oraz odwiedzić Central Park. Nowy Jork to miasto, które nigdy nie śpi,
+dlatego zawsze coś się tam dzieje – zarówno w dzień, jak i w nocy.
+</p>
+
+<p>
+Interesują mnie również wysokie drapacze chmur, takie jak Empire State Building,
+z którego można podziwiać niesamowity widok na całe miasto. To miejsce pełne kultury,
+różnych narodowości i wyjątkowej atmosfery.
+</p>
+
+<p>
+Uważam, że wyjazd do Nowego Jorku byłby niezapomnianą przygodą i spełnieniem marzeń.
+</p>
+
+</div>
+</section>
+
+<!-- GALERIA -->
+<section id="gallery">
+<div class="box">
+
+<h2>Galeria Nowego Jorku 🗽</h2>
+
+<button onclick="prevSlide()">⬅ Poprzednie</button>
+<button onclick="nextSlide()">Następne ➡</button>
+
+<br><br>
+
+<img id="slide" src="img/nowyjork.jpg">
+
+</div>
+</section>
+
+<!-- INFORMACJE -->
+<section id="info">
+<div class="box">
+
+<h2>Ciekawostki</h2>
+
+<p id="fact">Kliknij aby wylosować ciekawostkę</p>
+<button onclick="losuj()">Losuj</button>
+
+<h2>Quiz</h2>
+
+<p><b>1. W jakim kraju znajduje się Nowy Jork?</b></p>
+<label><input type="radio" name="q1" value="1"> USA</label><br>
+<label><input type="radio" name="q1" value="0"> Kanada</label><br>
+<label><input type="radio" name="q1" value="0"> Wielka Brytania</label>
+
+<p><b>2. Jak nazywa się słynny pomnik?</b></p>
+<label><input type="radio" name="q2" value="1"> Statua Wolności</label><br>
+<label><input type="radio" name="q2" value="0"> Koloseum</label><br>
+<label><input type="radio" name="q2" value="0"> Big Ben</label>
+
+<p><b>3. Jak nazywa się słynny plac?</b></p>
+<label><input type="radio" name="q3" value="1"> Times Square</label><br>
+<label><input type="radio" name="q3" value="0"> Plac Czerwony</label><br>
+<label><input type="radio" name="q3" value="0"> Trafalgar Square</label>
+
+<br>
+
+<button onclick="quiz()">Sprawdź</button>
+<p id="wynik"></p>
+
+</div>
+</section>
+
+<footer>
+Projekt: Nowy Jork - Nowakowski Krzysztof 2P
+</footer>
+
+<script>
+
+/* NAWIGACJA */
+function showPage(id) {
+    document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+}
+
+/* GALERIA – 10 ZDJĘĆ */
+const images = [
+"nowyjork.jpg",
+"nowyjork1.jpg",
+"nowyjork2.jpg",
+"nowyjork3.jpg",
+"nowyjork4.jpg",
+"nowyjork5.jpg",
+"nowyjork6.jpg",
+"nowyjork7.jpg",
+"nowyjork8.jpg",
+"nowyjork9.jpg"
+];
+
+let current = 0;
+
+function nextSlide() {
+    current = (current + 1) % images.length;
+    document.getElementById("slide").src = images[current];
+}
+
+function prevSlide() {
+    current = (current - 1 + images.length) % images.length;
+    document.getElementById("slide").src = images[current];
+}
+
+/* CIEKAWOSTKI */
+const fakty = [
+"Nowy Jork ma ponad 800 języków.",
+"Statua Wolności była prezentem od Francji.",
+"Times Square odwiedza miliony ludzi rocznie."
+];
+
+function losuj() {
+    let i = Math.floor(Math.random() * fakty.length);
+    document.getElementById("fact").innerText = fakty[i];
+}
+
+/* QUIZ */
+function quiz() {
+    let wynik = 0;
+
+    let q1 = document.querySelector('input[name="q1"]:checked');
+    let q2 = document.querySelector('input[name="q2"]:checked');
+    let q3 = document.querySelector('input[name="q3"]:checked');
+
+    if(q1) wynik += Number(q1.value);
+    if(q2) wynik += Number(q2.value);
+    if(q3) wynik += Number(q3.value);
+
+    document.getElementById("wynik").innerText = "Twój wynik: " + wynik + " / 3";
+}
+
+</script>
+
+</body>
+</html>
